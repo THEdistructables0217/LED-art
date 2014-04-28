@@ -1,0 +1,51 @@
+int d=5;
+int R=11; int G=10; int B=9;
+void setup() {
+  pinMode(R, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(B, OUTPUT);
+}
+void loop() {
+  for (int a=0; a<256; a++) {
+    analogWrite(R,a);
+    analogWrite(G,a);
+    analogWrite(B,a);
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) {
+    analogWrite(G,b);
+    analogWrite(B,b);
+    delay(d);
+  }
+  delay(200);
+  
+  for (int a=0; a<256; a++) {
+    analogWrite(G,a);
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) {
+    analogWrite(R,b);
+    delay(d);
+  }
+  delay(200);
+  
+  for (int a=0; a<256; a++) {
+    analogWrite(B,a);
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) {
+    analogWrite(G,b);
+    delay(d);
+  }
+  delay(200);
+  
+  for (int a=0; a<256; a++) {
+    analogWrite(R,a);
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) {
+    analogWrite(B,b);
+    delay(d);
+  }
+  delay(200);
+}
