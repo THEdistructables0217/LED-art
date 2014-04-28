@@ -1,0 +1,65 @@
+int d=5;
+int R=11; int G=10; int B=9;
+void setup() {
+  pinMode(R, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(B, OUTPUT);
+}
+void loop() {
+  // This will make the RGB LED to cycle through each color
+  for (int a=0; a<256; a++) { // White
+    analogWrite(R,random(a));
+    analogWrite(G,random(a));
+    analogWrite(B,random(a));
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) { // Red
+    analogWrite(R,random(b));
+    analogWrite(G,random(b));
+    analogWrite(B,random(b));
+    delay(d);
+  }
+  delay(200);
+  
+  for (int a=0; a<256; a++) { // Yellow
+    analogWrite(R,random(a));
+    analogWrite(G,random(a));
+    analogWrite(B,random(a));
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) { // Green
+    analogWrite(R,random(b));
+    analogWrite(G,random(b));
+    analogWrite(B,random(b));
+    delay(d);
+  }
+  delay(200);
+  
+  for (int a=0; a<256; a++) { // Cyan
+    analogWrite(R,random(a));
+    analogWrite(G,random(a));
+    analogWrite(B,random(a));
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) { // Blue
+    analogWrite(R,random(b));
+    analogWrite(G,random(b));
+    analogWrite(B,random(b));
+    delay(d);
+  }
+  delay(200);
+  
+  for (int a=0; a<256; a++) { // Purple/Magenta
+    analogWrite(R,random(a));
+    analogWrite(G,random(a));
+    analogWrite(B,random(a));
+    delay(d);
+  }
+  for (int b=255; b>=0; b--) { // Red
+    analogWrite(R,random(b));
+    analogWrite(G,random(b));
+    analogWrite(B,random(b));
+    delay(d);
+  }
+  delay(200);
+}
