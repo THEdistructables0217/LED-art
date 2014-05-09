@@ -1,0 +1,262 @@
+#include <IRremote.h>
+int receiverpin=12;
+int R=3;
+int G=5;
+int B=6;
+int d=5;
+int power=0;
+int brightness = random(-100,55);
+
+IRrecv irrecv(receiverpin);
+decode_results results;
+void setup(){
+  irrecv.enableIRIn();
+  pinMode(R, OUTPUT);
+  pinMode(G, OUTPUT);
+  pinMode(B, OUTPUT);
+  analogWrite(R,0);
+  analogWrite(G,0);
+  analogWrite(B,0);
+}
+  void loop(){
+  if(irrecv.decode(&results)){
+    if (results.value==0x290){ // mute
+      int brightness = random(-100,55);
+      analogWrite(R,200+brightness);
+      analogWrite(G,200+brightness);
+      analogWrite(B,200+brightness);
+      delay(50);
+    }
+    if (results.value==0x10){ // 1
+      analogWrite(R,255);// Red
+      analogWrite(G,0);
+      analogWrite(B,0);
+    }
+    else if (results.value==0x810){ // 2
+      analogWrite(R,255+brightness);//yellowish
+      analogWrite(G,100+brightness);
+      analogWrite(B,0+brightness);
+    }
+    else if (results.value==0x410){ // 3
+      analogWrite(R,255+brightness);//light green
+      analogWrite(G,255+brightness);
+      analogWrite(B,0+brightness);
+    }
+    else if (results.value==0xC10){ // 4
+      analogWrite(R,0);//green
+      analogWrite(G,255);
+      analogWrite(B,0);
+    }
+    else if (results.value==0x210){ // 5
+      analogWrite(R,15);//light blue
+      analogWrite(G,71);
+      analogWrite(B,182);
+    }
+    else if (results.value==0xA10){ // 6
+      analogWrite(R,0);//blue
+      analogWrite(G,0);
+      analogWrite(B,255);
+    }
+    else if (results.value==0x610){ // 7
+      analogWrite(R,255);//purple
+      analogWrite(G,0);
+      analogWrite(B,255);
+    }
+    else if (results.value==0xE10){ // 8
+      analogWrite(R,255);//white
+      analogWrite(G,255);
+      analogWrite(B,255);
+    }
+    else if (results.value==0x110){ // 9
+      analogWrite(R,255);//peachy-ish
+      analogWrite(G,70);
+      analogWrite(B,6);
+    }
+    else if (results.value==0x910){ // 0
+      analogWrite(R,35);//lighter blue
+      analogWrite(G,112);
+      analogWrite(B,109);
+    }
+    else if (results.value==0xA90){ // power
+    if (power==1){
+      analogWrite(R,255);// on
+      analogWrite(G,255);
+      analogWrite(B,255);
+      delay (500);
+      
+      power = 0;
+    }
+    else  {  //power off
+      analogWrite(R,LOW);// 
+      analogWrite(G,LOW);
+      analogWrite(B,LOW);
+      delay (500);
+      power =1;
+      }
+    }
+    else if (results.value==0x90) { // up
+      for (int a=0; a<256; a++) {
+        analogWrite(R,a);
+        analogWrite(G,a);
+        analogWrite(B,a);
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(G,b);
+        analogWrite(B,b);
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(G,a);
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,b);
+        delay(d);
+      }
+      delay(200);
+      
+      for (int a=0; a<256; a++) {
+        analogWrite(B,a);
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(G,b);
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(R,a);
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(B,b);
+        delay(d);
+      }
+      delay(200);
+    }
+    
+    else if (results.value==0x490) { // right
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        analogWrite(G,random(a));
+        analogWrite(B,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,random(b));
+        analogWrite(G,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        analogWrite(G,random(a));
+        analogWrite(B,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,random(b));
+        analogWrite(G,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        analogWrite(G,random(a));
+        analogWrite(B,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,random(b));
+        analogWrite(G,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        analogWrite(G,random(a));
+        analogWrite(B,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,random(b));
+        analogWrite(G,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+    }
+    
+    else if (results.value==0x890) { // down
+      analogWrite(R,random(256));
+      delay(1000);
+      analogWrite(G,random(256));
+      delay(1000);
+      analogWrite(B,random(256));
+      delay(1000);
+    }
+    
+    else if (results.value==0xC90) { // left
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        analogWrite(G,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(G,random(b));
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(B,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(G,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+  
+      for (int a=0; a<256; a++) {
+        analogWrite(R,random(a));
+        analogWrite(G,random(a));
+        analogWrite(B,random(a));
+        delay(d);
+      }
+      for (int b=255; b>=0; b--) {
+        analogWrite(R,random(b));
+        analogWrite(G,random(b));
+        analogWrite(B,random(b));
+        delay(d);
+      }
+      delay(200);
+    }
+ 
+    for(int z = 0;z<2;z++){
+    irrecv.resume();
+    }
+  }
+}
